@@ -15,6 +15,7 @@ Feature: Pets Api Tests
       | 2  | Black   | pending   |
       | 3  | Toby    | sold      |
       | 4  | Bailey  | cancelled |
+      | 5  | Tobie   | pending   |
 
   Scenario Outline: Get the pet by ID
     Given path '/pet/<id>'
@@ -28,15 +29,19 @@ Feature: Pets Api Tests
 
   Scenario: Update the pet´s name and status
     Given path '/pet/'
-    And request { "id": 1, "category": { "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "sold"}
+    And request { "id": 1, "category": { "id": 1, "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "sold"}
     When method put
     Then status 200
     And match response.name == "DogeCoin"
     And match response.status == "sold"
 
-  Scenario: Get the pet by status
+  Scenario Outline: Get pets by status
     And path 'pet/findByStatus'
-    And params { status: 'pending' }
+    And params { status: 'sold' }
     When method get
     Then status 200
-    And match response contains { "id": 2, "category": { "id": 1, "name": "Doberman" }, "name": "Black", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "pending"}
+    And match response contains { "id": <id>, "category": { "id": 1, "name": "Doberman" }, "name": "<petName>", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "sold"}
+    Examples:
+      | id | petName  |
+      | 1  | DogeCoin |
+      | 3  | Toby     |
