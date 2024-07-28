@@ -27,13 +27,17 @@ Feature: Pets Api Tests
       | 1  | Doge    |
       | 2  | Black   |
 
-  Scenario: Update the pet´s name and status
+  Scenario Outline: Update the pet´s name and status
     Given path '/pet/'
-    And request { "id": 1, "category": { "id": 1, "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "sold"}
+    And request { "id": <id>, "category": { "id": 1, "name": "Doberman" }, "name": "<petName>", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "<petStatus>"}
     When method put
     Then status 200
-    And match response.name == "DogeCoin"
-    And match response.status == "sold"
+    And match response.name == "<petName>"
+    And match response.status == "<petStatus>"
+    Examples:
+      | id | petName  | petStatus |
+      | 1  | DogeCoin | sold      |
+      | 5  | Rufo     | cancelled |
 
   Scenario Outline: Get pets by status
     And path 'pet/findByStatus'
