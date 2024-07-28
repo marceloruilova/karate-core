@@ -16,7 +16,6 @@ Feature: Pets Api Tests
       | 3  | Toby    | sold      |
       | 4  | Bailey  | cancelled |
       | 5  | Tobie   | pending   |
-      | 6  |         | sold      |
 
   Scenario: Add a pet with missing status
     Given path '/pet'
@@ -24,6 +23,13 @@ Feature: Pets Api Tests
     When method post
     Then status 200
     And match response.id == 45
+
+  Scenario: Add a pet with missing name
+    Given path '/pet'
+    And request { "id": 49, "category": { "id": 1, "name": "Doberman" }, "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "available"}
+    When method post
+    Then status 200
+    And match response.id == 49
 
   Scenario Outline: Get the pet by ID
     Given path '/pet/<id>'

@@ -1,0 +1,16 @@
+Conclusiones:
+
+- En conclusión al ser una api de prueba tiene muchos casos válidos los cuales no deberían ser tomados en cuenta, por
+ejemplo al momento de enviar una mascota sin nombre o sin un estado válido el mismo debería dar error o tener uno de default.
+
+- Aceptar nombres largos y carácteres especiales ayudan a la flexibilidad de la aplicación.
+
+- A pesar que la api dice aceptar estados disponible, pendiente y vendido. La misma también esta aceptando otros tipos
+de string como cancelado. Lo mismo al tratar de actualizar actualiza sin restricciones.
+
+- Al traer la data usando el findByStatus se debe verificar que la entidad aparezca, mas no es posible verificar que
+contenga la misma cantidad de datos que inicialmente se deseaba ya que otras personas pueden estar usando el api y
+generar inconsistencias al momento de verificar.
+
+- La utilización de scenario outline nos ayuda a verificar varios casos de prueba en uno solo lo que facilita la
+implementación de la solución.
