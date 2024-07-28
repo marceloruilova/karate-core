@@ -37,11 +37,12 @@ Feature: Pets Api Tests
 
   Scenario Outline: Get pets by status
     And path 'pet/findByStatus'
-    And params { status: 'sold' }
+    And params { status: "<petStatus>" }
     When method get
     Then status 200
-    And match response contains { "id": <id>, "category": { "id": 1, "name": "Doberman" }, "name": "<petName>", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "sold"}
+    And match response contains { "id": <id>, "category": { "id": 1, "name": "Doberman" }, "name": "<petName>", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "<petStatus>"}
     Examples:
-      | id | petName  |
-      | 1  | DogeCoin |
-      | 3  | Toby     |
+      | id | petName  | petStatus |
+      | 1  | DogeCoin | sold      |
+      | 3  | Toby     | sold      |
+      | 4  | Bailey   | cancelled |
