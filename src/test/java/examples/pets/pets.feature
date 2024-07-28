@@ -17,8 +17,16 @@ Feature: Pets Api Tests
   Scenario: Update the pet´s name and status
     Given url 'https://petstore.swagger.io/v2'
     And path 'pet/1'
-    And request { "id": 1, "category": { "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "cancelled"}
+    And request { "id": 1, "category": { "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "pending"}
     When method put
     Then status 200
     And match response.name == "DogeCoin"
     And match response.status == "cancelled"
+
+  Scenario: Get the pet by status
+    Given url 'https://petstore.swagger.io/v2'
+    And path 'pet/findByStatus'
+    And params { status: 'cancelled' }
+    When method get
+    Then status 200
+    And match response contains { "id": 1, "category": { "id": 0, "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "pending"}
