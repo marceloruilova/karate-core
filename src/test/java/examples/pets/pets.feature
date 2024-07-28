@@ -5,33 +5,38 @@ Feature: Pets Api Tests
 
   Scenario Outline: Add a pet to the store
     Given path '/pet'
-    And request { "id": 1, "category": { "id": 1, "name": <petName> }, "name": "Doge", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": <petStatus>}
+    And request { "id": <id>, "category": { "id": 1, "name": "Doberman" }, "name": <petName>, "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": <petStatus>}
     When method post
     Then status 200
-    And match response.id == 1
+    And match response.id == <id>
     Examples:
-      | petName | petStatus |
-      | Doge    | available |
-      | Black   | pending   |
-      | Bailey  | cancelled   |
+      | id | petName | petStatus |
+      | 1  | Doge    | available |
+      | 2  | Black   | pending   |
+      | 3  | Toby    | sold      |
+      | 4  | Bailey  | cancelled |
 
-  Scenario: Get the pet by ID
-    Given path '/pet/1'
+  Scenario Outline: Get the pet by ID
+    Given path '/pet/<id>'
     When method get
     Then status 200
-    And match response.name == "Doge"
+    And match response.name == "<petName>"
+    Examples:
+      | id | petName |
+      | 1  | Doge    |
+      | 2  | Black   |
 
   Scenario: Update the pet´s name and status
     Given path '/pet/'
-    And request { "id": 1, "category": { "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "cancelled"}
+    And request { "id": 1, "category": { "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "sold"}
     When method put
     Then status 200
     And match response.name == "DogeCoin"
-    And match response.status == "cancelled"
+    And match response.status == "sold"
 
   Scenario: Get the pet by status
     And path 'pet/findByStatus'
-    And params { status: 'cancelled' }
+    And params { status: 'pending' }
     When method get
     Then status 200
-    And match response contains { "id": 1, "category": { "id": 0, "name": "Doberman" }, "name": "DogeCoin", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "cancelled"}
+    And match response contains { "id": 2, "category": { "id": 1, "name": "Doberman" }, "name": "Black", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "pending"}
