@@ -43,19 +43,19 @@ Aquí describiremos las versiones de las dependencias, paquetes u otras tecnolog
 ### IntelliJ:
 1. Dirígete a la barra derecha y haz clic en la `m` (Maven).
 2. Haz clic en `Lifecycle` y luego en `test`.
-3. Una forma más eficiente de probar es dirigirse al archivo `CartRunner`, donde al lado de `public` aparece un icono para ejecutar el test o depurarlo.
+3. Una forma más eficiente de probar es dirigirse al archivo `PetRunner`, donde al lado de `public` aparece un icono para ejecutar el test o depurarlo.
 
 ### Comandos:
 1. `mvn compile`
 2. `mvn test`
-3. `mvn test -Dtest=PetRunner` (Ejecuta el test `CartRunner` específico con interfaz gráfica)
+3. `mvn test -Dtest=PetRunner` (Ejecuta el test `PetRunner` específico con interfaz gráfica)
 
 ---
 
 # Reportes
 
 1. `mvn compile`
-2. `mvn test -Dtest=PetRunner` (Ejecuta el test `CartRunner` específico con interfaz gráfica)
+2. `mvn test -Dtest=PetRunner` (Ejecuta el test `PetRunner` específico con interfaz gráfica)
 3. Visualiza el reporte en: `/target/karate-reports/karate-summary.html`
 
 ---
@@ -63,5 +63,5 @@ Aquí describiremos las versiones de las dependencias, paquetes u otras tecnolog
 # Información adicional
 
 - No olvides ejecutar el comando `mvn test -Dtest=PetRunner` para visualizar los reportes.
-- La mejor manera de testear es dirigiéndose al archivo `CartRunner`.
+- La mejor manera de testear es dirigiéndose al archivo `PetRunner`.
 - Se puede utilizar **headless** para que los tests se ejecuten más rápido.
