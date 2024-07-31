@@ -1,0 +1,7 @@
+{
+  "id": "49",
+  "category": { "id": 1, "name": "Doberman" },
+  "photoUrls": ["string"],
+  "tags": [{"id": 1, "name": "dog-image"}],
+  "status": "available"
+}
