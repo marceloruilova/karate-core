@@ -48,7 +48,7 @@ Aquí describiremos las versiones de las dependencias, paquetes u otras tecnolog
 ### Comandos:
 1. `mvn compile`
 2. `mvn test`
-3. `mvn test -Dtest=PetRunner` (Ejecuta el test `PetRunner` específico con interfaz gráfica)
+3. `mvn test -Dtest=PetRunner` (Ejecuta el test `PetRunner` específico con los comandos en consola)
 
 ---
 
@@ -64,4 +64,3 @@ Aquí describiremos las versiones de las dependencias, paquetes u otras tecnolog
 
 - No olvides ejecutar el comando `mvn test -Dtest=PetRunner` para visualizar los reportes.
 - La mejor manera de testear es dirigiéndose al archivo `PetRunner`.
-- Se puede utilizar **headless** para que los tests se ejecuten más rápido.
