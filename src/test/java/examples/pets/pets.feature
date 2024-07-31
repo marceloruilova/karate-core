@@ -32,9 +32,7 @@ Feature: Pets Api Tests
     Then status 200
     And match response.name == "<petName>"
     Examples:
-      | id | petName |
-      | 1  | The Faibol dog from the mountains of the United States@ |
-      | 2  | Black   |
+      | read('data/newPet.csv') |
 
   Scenario Outline: Update the pet´s name and status
     Given path '/pet/'
@@ -44,9 +42,7 @@ Feature: Pets Api Tests
     And match response.name == "<petName>"
     And match response.status == "<petStatus>"
     Examples:
-      | id | petName  | petStatus |
-      | 1  | DogeCoin | sold      |
-      | 5  | Rufo     | cancelled |
+      | read('data/updatePet.csv') |
 
   Scenario Outline: Get pets by status
     And path 'pet/findByStatus'
@@ -55,7 +51,4 @@ Feature: Pets Api Tests
     Then status 200
     And match response contains { "id": <id>, "category": { "id": 1, "name": "Doberman" }, "name": "<petName>", "photoUrls": ["string"], "tags": [{"id": 1,"name": "dog-image"}],"status": "<petStatus>"}
     Examples:
-      | id | petName  | petStatus |
-      | 1  | DogeCoin | sold      |
-      | 3  | Toby     | sold      |
-      | 4  | Bailey   | cancelled |
+      | read('data/getByStatusPet.csv') |
