@@ -10,12 +10,7 @@ Feature: Pets Api Tests
     Then status 200
     And match response.id == <id>
     Examples:
-      | id | petName | petStatus |
-      | 1  | The Faibol dog from the mountains of the United States@ | available |
-      | 2  | Black   | pending   |
-      | 3  | Toby    | sold      |
-      | 4  | Bailey  | cancelled |
-      | 5  | Tobie   | pending   |
+      | read('data/newPet.csv') |
 
   Scenario: Add a pet with missing status
     Given path '/pet'

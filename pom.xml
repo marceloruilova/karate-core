@@ -36,9 +36,9 @@
         <testResources>
             <testResource>
                 <directory>src/test/java</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
+            </testResource>
+            <testResource>
+                <directory>src/test/resources</directory>
             </testResource>
         </testResources>
         <plugins>
@@ -58,6 +58,9 @@
                 <version>${maven.surefire.version}</version>
                 <configuration>
                     <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>
